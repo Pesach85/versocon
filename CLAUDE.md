@@ -45,8 +45,8 @@
 - Categoria inventario: fork convertitore offline.
 
 ### Architettura (contesto)
-_Revisione 2026-10-16, metodo Cum scire, fonte GitHub `Pesach85/versocon` @ `0880e420df9b` (sola lettura)._
-- **Stack**: Python ≥3.11, FastAPI + uvicorn, pywebview (finestra desktop), Pillow/pillow-heif, PyMuPDF, pytesseract; frontend HTML/CSS/JS vanilla; ffmpeg e Tesseract esterni [VERIFICATO: `requirements.txt`, `.github/workflows/ci.yml`, albero @`0880e420df9b`]
+_Revisione 2026-10-16, metodo Cum scire, fonte GitHub `Pesach85/versocon` @ `0880e420df9b` (sola lettura); riverifica puntuale 2026-10-18 @ `009e942`._
+- **Stack**: Python ≥3.11, FastAPI + uvicorn, pywebview (finestra desktop), Pillow/pillow-heif, PyMuPDF, pytesseract, opencv-python-headless, numpy; frontend HTML/CSS/JS vanilla; ffmpeg e Tesseract esterni [VERIFICATO: `requirements.txt`, `.github/workflows/ci.yml`, albero @`0880e420df9b`; `requirements.txt` riletto @`009e942`]
 - **Struttura** [VERIFICATO: albero @`0880e420df9b`]:
   - `app/` (main, security, i18n, constants): server FastAPI locale
   - `converters/`: images, documents, pdfedit, sign, compress, extract, video, proc
@@ -54,7 +54,7 @@ _Revisione 2026-10-16, metodo Cum scire, fonte GitHub `Pesach85/versocon` @ `088
   - `packaging/` (inno, msix, scoop, winget, spec PyInstaller): distribuzione Windows; `tests/`: pytest
 - **Flusso dati**: file utente (HEIC/PDF/video) → UI locale → API FastAPI su loopback → `converters/*` (Pillow/PyMuPDF/Tesseract/ffmpeg) → file convertito su disco; nessun upload [VERIFICATO: README; INFERITO: dettaglio routing]
 - **Comandi build/test** [VERIFICATO: `.github/workflows/ci.yml` @`0880e420df9b`]: `pip install -r requirements.txt -r requirements-ocr.txt` e `python -m pytest tests -q` (sandbox, con ffmpeg/Tesseract); avvio `run.py` [INFERITO]
-- **Confini / cosa NON toccare**: `static/vendor/` (librerie terze), `packaging/` e workflow `msix.yml`/`release.yml` (rilascio upstream), `requirements-lock.txt`; tutto upstream (fork 0 avanti / 100 indietro rispetto a `lupanostefano/versocon` [VERIFICATO: API compare 2026-10-16])
+- **Confini / cosa NON toccare**: `static/vendor/` (librerie terze), `packaging/` e workflow `msix.yml`/`release.yml` (rilascio upstream), `requirements-lock.txt`; tutto upstream (fork di `lupanostefano/versocon`; unico file locale: `CLAUDE.md` [VERIFICATO: API compare 2026-10-18])
 - **UI / design**: UI desktop pywebview su HTML/JS, tema "shonen manga", drag&drop, toast, IT/EN [VERIFICATO: README, `requirements.txt`]
 - **Glossario**: *HEIC* · *converter* (modulo in `converters/`) · *pdfedit* (editor PDF con anteprima) · *sign* (firma disegnata/generata) · *OCR* (Tesseract)
 - IGNOTO: 0 campi
